@@ -117,16 +117,17 @@
 					353FD2711D9D6E21001D9C00 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = NW5Z323A95;
-						LastSwiftMigration = 1240;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 353FD26D1D9D6E21001D9C00 /* Build configuration list for PBXProject "Eateries" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = en;
+			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -309,10 +310,10 @@
 				DEVELOPMENT_TEAM = NW5Z323A95;
 				INFOPLIST_FILE = Eateries/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.IT-Center";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.swiftbook1.Eateries1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -323,10 +324,10 @@
 				DEVELOPMENT_TEAM = NW5Z323A95;
 				INFOPLIST_FILE = Eateries/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.IT-Center";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.swiftbook1.Eateries1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
