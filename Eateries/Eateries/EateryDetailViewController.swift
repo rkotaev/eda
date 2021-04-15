@@ -11,12 +11,15 @@ import UIKit
 class EateryDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
   @IBOutlet weak var rateButton: UIButton!
+  @IBOutlet weak var mapButton: UIButton!
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var imageView: UIImageView!
   var restaurant: Restaurant?
   
   @IBAction func unwindSegue(segue: UIStoryboardSegue) {
-  
+    guard let svc = segue.source as? RateViewController else { return }
+    guard let rating = svc.restRating else { return }
+    rateButton.setImage(UIImage(named: rating), for: .normal)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -27,9 +30,13 @@ class EateryDetailViewController: UIViewController, UITableViewDataSource, UITab
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    rateButton.layer.cornerRadius = 5
-    rateButton.layer.borderWidth = 1
-    rateButton.layer.borderColor = UIColor.white.cgColor
+    let buttons = [rateButton, mapButton]
+    for button in buttons {
+      guard let button = button else { break }
+      button.layer.cornerRadius = 5
+      button.layer.borderWidth = 1
+      button.layer.borderColor = UIColor.white.cgColor
+    }
     tableView.estimatedRowHeight = 38
     tableView.rowHeight = UITableViewAutomaticDimension
     
