@@ -112,7 +112,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="6ba-Mv-KeR" firstAttribute="top" secondItem="XMd-zd-Ruj" secondAttribute="top" id="AtR-Dd-bDD"/>
+                            <constraint firstAttribute="bottom" secondItem="6ba-Mv-KeR" secondAttribute="bottom" id="Ej7-tH-ngc"/>
                             <constraint firstItem="P3k-Xt-ib3" firstAttribute="top" secondItem="6ba-Mv-KeR" secondAttribute="bottom" id="KnN-5V-1EO"/>
+                            <constraint firstAttribute="trailing" secondItem="6ba-Mv-KeR" secondAttribute="trailing" id="Lma-Y9-Det"/>
+                            <constraint firstItem="6ba-Mv-KeR" firstAttribute="leading" secondItem="XMd-zd-Ruj" secondAttribute="leading" id="R5i-xU-pak"/>
                             <constraint firstItem="6ba-Mv-KeR" firstAttribute="top" secondItem="XMd-zd-Ruj" secondAttribute="top" id="UF9-yZ-iFr"/>
                             <constraint firstItem="6ba-Mv-KeR" firstAttribute="leading" secondItem="XMd-zd-Ruj" secondAttribute="leading" id="s8U-GC-bQB"/>
                             <constraint firstAttribute="trailing" secondItem="6ba-Mv-KeR" secondAttribute="trailing" id="zk5-xG-1IO"/>
