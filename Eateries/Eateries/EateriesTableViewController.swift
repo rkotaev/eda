@@ -7,30 +7,33 @@
 //
 
 import UIKit
+import CoreData
+
 
 class EateriesTableViewController: UITableViewController {
   
-  var restaurants: [Restaurant] = [
-    Restaurant(name: "Ogonёk Grill&Bar", type: "ресторан", location: "Уфа, бульвар Хадии Давлетшиной 21, вход со стороны улицы", image: "ogonek.jpg", isVisited: false),
-    Restaurant(name: "Елу", type: "ресторан", location: "Уфа", image: "elu.jpg", isVisited: false),
-    Restaurant(name: "Bonsai", type: "ресторан", location: "Уфа", image: "bonsai.jpg", isVisited: false),
-    Restaurant(name: "Дастархан", type: "ресторан", location: "Уфа", image: "dastarhan.jpg", isVisited: false),
-    Restaurant(name: "Индокитай", type: "ресторан", location: "Уфа", image: "indokitay.jpg", isVisited: false),
-    Restaurant(name: "X.O", type: "ресторан-клуб", location: "Уфа", image: "x.o.jpg", isVisited: false),
-    Restaurant(name: "Балкан Гриль", type: "ресторан", location: "Уфа", image: "balkan.jpg", isVisited: false),
-    Restaurant(name: "Respublica", type: "ресторан", location: "Уфа", image: "respublika.jpg", isVisited: false),
-    Restaurant(name: "Speak Easy", type: "ресторанный комплекс", location: "Уфа", image: "speakeasy.jpg", isVisited: false),
-    Restaurant(name: "Morris Pub", type: "ресторан", location: "Уфа", image: "morris.jpg", isVisited: false),
-    Restaurant(name: "Вкусные истории", type: "ресторан", location: "Уфа", image: "istorii.jpg", isVisited: false),
-    Restaurant(name: "Классик", type: "ресторан", location: "Уфа", image: "klassik.jpg", isVisited: false),
-    Restaurant(name: "Love&Life", type: "ресторан", location: "Уфа", image: "love.jpg", isVisited: false),
-    Restaurant(name: "Шок", type: "ресторан", location: "Уфа", image: "shok.jpg", isVisited: false),
-    Restaurant(name: "Бочка", type: "ресторан", location:  "Уфа", image: "bochka.jpg", isVisited: false)]
+  var fetchResultsController: NSFetchedResultsController<Restaurant>!
+  var restaurants: [Restaurant] = []
+//    Restaurant(name: "Ogonёk Grill&Bar", type: "ресторан", location: "Уфа, бульвар Хадии Давлетшиной 21, вход со стороны улицы", image: "ogonek.jpg", isVisited: false),
+//    Restaurant(name: "Елу", type: "ресторан", location: "Уфа", image: "elu.jpg", isVisited: false),
+//    Restaurant(name: "Bonsai", type: "ресторан", location: "Уфа", image: "bonsai.jpg", isVisited: false),
+//    Restaurant(name: "Дастархан", type: "ресторан", location: "Уфа", image: "dastarhan.jpg", isVisited: false),
+//    Restaurant(name: "Индокитай", type: "ресторан", location: "Уфа", image: "indokitay.jpg", isVisited: false),
+//    Restaurant(name: "X.O", type: "ресторан-клуб", location: "Уфа", image: "x.o.jpg", isVisited: false),
+//    Restaurant(name: "Балкан Гриль", type: "ресторан", location: "Уфа", image: "balkan.jpg", isVisited: false),
+//    Restaurant(name: "Respublica", type: "ресторан", location: "Уфа", image: "respublika.jpg", isVisited: false),
+//    Restaurant(name: "Speak Easy", type: "ресторанный комплекс", location: "Уфа", image: "speakeasy.jpg", isVisited: false),
+//    Restaurant(name: "Morris Pub", type: "ресторан", location: "Уфа", image: "morris.jpg", isVisited: false),
+//    Restaurant(name: "Вкусные истории", type: "ресторан", location: "Уфа", image: "istorii.jpg", isVisited: false),
+//    Restaurant(name: "Классик", type: "ресторан", location: "Уфа", image: "klassik.jpg", isVisited: false),
+//    Restaurant(name: "Love&Life", type: "ресторан", location: "Уфа", image: "love.jpg", isVisited: false),
+//    Restaurant(name: "Шок", type: "ресторан", location: "Уфа", image: "shok.jpg", isVisited: false),
+//    Restaurant(name: "Бочка", type: "ресторан", location:  "Уфа", image: "bochka.jpg", isVisited: false)]
   
-    @IBAction func close(segue: UIStoryboardSegue) {
-        
-    }
-    
+  @IBAction func close(segue: UIStoryboardSegue) {
+  
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     navigationController?.hidesBarsOnSwipe = true
   }
@@ -42,11 +45,25 @@ class EateriesTableViewController: UITableViewController {
     tableView.rowHeight = UITableView.automaticDimension
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
+   // create fetch request with descriptor
+    let fetchRequest: NSFetchRequest<Restaurant> = Restaurant.fetchRequest()
+    let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+    fetchRequest.sortDescriptors = [sortDescriptor]
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    // getting context
+    if let context = (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.persistentContainer.viewContext {
+      // creating fetch result controller
+      fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+      
+      // trying to retrieve data
+      do {
+        try fetchResultsController.performFetch()
+        // save retrieved data into restaurants array
+        restaurants = fetchResultsController.fetchedObjects!
+      } catch let error as NSError {
+        print(error.localizedDescription)
+      }
+    }
   }
   
   // MARK: - Table view data source
@@ -65,7 +82,7 @@ class EateriesTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! EateriesTableViewCell
     
-    cell.thumbnailImageView.image = UIImage(named: restaurants[indexPath.row].image)
+    cell.thumbnailImageView.image = UIImage(data: restaurants[indexPath.row].image! as Data)
     cell.thumbnailImageView.layer.cornerRadius = 32.5
     cell.thumbnailImageView.clipsToBounds = true
     cell.nameLabel.text = restaurants[indexPath.row].name
@@ -129,8 +146,8 @@ class EateriesTableViewController: UITableViewController {
     
     
     let share = UITableViewRowAction(style: .default, title: "Поделиться") { (action, indexPath) in
-      let defaultText = "Я сейчас в " + self.restaurants[indexPath.row].name
-      if let image = UIImage(named: self.restaurants[indexPath.row].image) {
+      let defaultText = "Я сейчас в " + self.restaurants[indexPath.row].name!
+      if let image = UIImage(data: self.restaurants[indexPath.row].image! as Data) {
         let activityController = UIActivityViewController(activityItems: [defaultText, image], applicationActivities: nil)
         self.present(activityController, animated: true, completion: nil)
       }
