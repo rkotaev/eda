@@ -38,7 +38,7 @@ class EateryDetailViewController: UIViewController, UITableViewDataSource, UITab
       button.layer.borderColor = UIColor.white.cgColor
     }
     tableView.estimatedRowHeight = 38
-    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.rowHeight = UITableView.automaticDimension
     
     imageView.image = UIImage(named: restaurant!.image)
     

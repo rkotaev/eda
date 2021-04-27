@@ -39,7 +39,7 @@ class EateriesTableViewController: UITableViewController {
     super.viewDidLoad()
     
     tableView.estimatedRowHeight = 85
-    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.rowHeight = UITableView.automaticDimension
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     // Uncomment the following line to preserve selection between presentations

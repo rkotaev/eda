@@ -276,12 +276,18 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                                     <state key="normal" title="Да"/>
+                                                    <connections>
+                                                        <action selector="toggleIsVisitedPressed:" destination="pJR-c6-CwA" eventType="touchUpInside" id="1r6-qQ-AhR"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PhN-rz-ENo">
                                                     <rect key="frame" x="93" y="42" width="60" height="30"/>
                                                     <color key="backgroundColor" red="0.86656181259999998" green="0.86656181259999998" blue="0.86656181259999998" alpha="0.8980392157" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                                     <state key="normal" title="Нет"/>
+                                                    <connections>
+                                                        <action selector="toggleIsVisitedPressed:" destination="pJR-c6-CwA" eventType="touchUpInside" id="nTz-MR-9UO"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -315,10 +321,20 @@
                                 <segue destination="IVm-Ro-L0E" kind="unwind" unwindAction="closeWithSegue:" id="lUy-dB-f8K"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="8HX-ak-f1I">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="pJR-c6-CwA" id="5IW-jC-tQp"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="ImageView" destination="Gry-6v-aye" id="4N7-Lz-8OU"/>
+                        <outlet property="adressTextField" destination="ekH-TV-iHI" id="zxL-zA-GJ8"/>
+                        <outlet property="nameTextField" destination="nTZ-rR-uGc" id="T6l-id-NpS"/>
+                        <outlet property="noButton" destination="PhN-rz-ENo" id="NHj-6u-0zZ"/>
+                        <outlet property="typeTextField" destination="ekH-TV-iHI" id="Sho-SF-uwf"/>
+                        <outlet property="yesButton" destination="1xW-zh-Pew" id="FLq-FL-2qt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tah-k2-lFW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
