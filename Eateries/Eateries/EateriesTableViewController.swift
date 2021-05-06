@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-class EateriesTableViewController: UITableViewController {
+class EateriesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
   
   var fetchResultsController: NSFetchedResultsController<Restaurant>!
   var restaurants: [Restaurant] = []
@@ -54,6 +54,7 @@ class EateriesTableViewController: UITableViewController {
     if let context = (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.persistentContainer.viewContext {
       // creating fetch result controller
       fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+      fetchResultsController.delegate = self
       
       // trying to retrieve data
       do {
@@ -64,6 +65,31 @@ class EateriesTableViewController: UITableViewController {
         print(error.localizedDescription)
       }
     }
+  }
+  
+  // MARK: - Fetch results controller delegate
+  
+  func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    tableView.beginUpdates()
+  }
+  
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    
+    switch type {
+    case .insert: guard let indexPath = newIndexPath else { break }
+    tableView.insertRows(at: [indexPath], with: .fade)
+    case .delete: guard let indexPath = indexPath else { break }
+      tableView.deleteRows(at: [indexPath], with: .fade)
+    case .update: guard let indexPath = indexPath else { break }
+      tableView.reloadRows(at: [indexPath], with: .fade)
+    default:
+      tableView.reloadData()
+    }
+    restaurants = controller.fetchedObjects as! [Restaurant]
+  }
+  
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    tableView.endUpdates()
   }
   
   // MARK: - Table view data source
@@ -147,7 +173,7 @@ class EateriesTableViewController: UITableViewController {
     
     let share = UITableViewRowAction(style: .default, title: "Поделиться") { (action, indexPath) in
       let defaultText = "Я сейчас в " + self.restaurants[indexPath.row].name!
-      if let image = UIImage(data: self.restaurants[indexPath.row].image! as Data) {
+        if let image = UIImage(data: self.restaurants[indexPath.row].image! as Data) {
         let activityController = UIActivityViewController(activityItems: [defaultText, image], applicationActivities: nil)
         self.present(activityController, animated: true, completion: nil)
       }
@@ -155,7 +181,16 @@ class EateriesTableViewController: UITableViewController {
     
     let delete = UITableViewRowAction(style: .default, title: "Удалить") { (action, indexPath) in
       self.restaurants.remove(at: indexPath.row)
-      tableView.deleteRows(at: [indexPath], with: .fade)
+      if let context = (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.persistentContainer.viewContext {
+        let objectToDelete = self.fetchResultsController.object(at: indexPath)
+        context.delete(objectToDelete)
+        
+        do {
+          try context.save()
+        } catch {
+          print(error.localizedDescription)
+        }
+      }
     }
     
     share.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)

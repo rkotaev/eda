@@ -47,8 +47,8 @@ class NewEateryTableViewController: UITableViewController, UIImagePickerControll
         restaurant.type = typeTextField.text
         restaurant.isVisited = isVisited
         if let image = imageView.image {
-
-          restaurant.image = image.pngData()
+          // as we expect to get binary data so we cast to NSData
+          restaurant.image = image.pngData() as Data?
         }
         // trying save context
         do {

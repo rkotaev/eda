@@ -279,8 +279,8 @@
                                                 <constraint firstItem="tah-cD-TdN" firstAttribute="leading" secondItem="OT7-fE-PEd" secondAttribute="trailing" constant="8" id="OAy-Tn-ZCQ"/>
                                                 <constraint firstItem="tah-cD-TdN" firstAttribute="height" secondItem="OT7-fE-PEd" secondAttribute="height" id="ViN-Wg-18G"/>
                                                 <constraint firstItem="OT7-fE-PEd" firstAttribute="leading" secondItem="hz1-jW-zVg" secondAttribute="leadingMargin" constant="12" id="YFr-I1-VqX"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tah-cD-TdN" secondAttribute="trailing" constant="20" symbolic="YES" id="ds2-HQ-a0w"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="0m0-IP-XBg" secondAttribute="trailing" id="oB3-UP-y3y"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tah-cD-TdN" secondAttribute="trailing" constant="20" symbolic="YES" id="toP-Hb-ONN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
