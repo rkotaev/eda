@@ -47,8 +47,7 @@ class NewEateryTableViewController: UITableViewController, UIImagePickerControll
         restaurant.type = typeTextField.text
         restaurant.isVisited = isVisited
         if let image = imageView.image {
-          // as we expect to get binary data so we cast to NSData
-          restaurant.image = image.pngData() as Data?
+          restaurant.image = UIImagePNGRepresentation(image) 
         }
         // trying save context
         do {
@@ -76,11 +75,8 @@ class NewEateryTableViewController: UITableViewController, UIImagePickerControll
     // Dispose of any resources that can be recreated.
   }
   
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
-    imageView.image = infoconvertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage) as? UIImage
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    imageView.image = info[UIImagePickerControllerEditedImage] as? UIImage
     imageView.contentMode = .scaleAspectFill
     imageView.clipsToBounds = true
     dismiss(animated: true, completion: nil)
@@ -106,7 +102,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     tableView.deselectRow(at: indexPath, animated: true)
   }
   
-  func chooseImagePickerAction(source: UIImagePickerController.SourceType) {
+  func chooseImagePickerAction(source: UIImagePickerControllerSourceType) {
     if UIImagePickerController.isSourceTypeAvailable(source) {
       let imagePicker = UIImagePickerController()
       imagePicker.delegate = self
@@ -171,14 +167,4 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
    }
    */
   
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
 }

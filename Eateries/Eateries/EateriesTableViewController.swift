@@ -13,7 +13,11 @@ import CoreData
 class EateriesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
   
   var fetchResultsController: NSFetchedResultsController<Restaurant>!
+  var searchController: UISearchController!
+  var filteredResultArray: [Restaurant] = []
   var restaurants: [Restaurant] = []
+  
+  
 //    Restaurant(name: "Ogonёk Grill&Bar", type: "ресторан", location: "Уфа, бульвар Хадии Давлетшиной 21, вход со стороны улицы", image: "ogonek.jpg", isVisited: false),
 //    Restaurant(name: "Елу", type: "ресторан", location: "Уфа", image: "elu.jpg", isVisited: false),
 //    Restaurant(name: "Bonsai", type: "ресторан", location: "Уфа", image: "bonsai.jpg", isVisited: false),
@@ -38,11 +42,26 @@ class EateriesTableViewController: UITableViewController, NSFetchedResultsContro
     navigationController?.hidesBarsOnSwipe = true
   }
   
+  func filterContentFor(searchText text: String) {
+    filteredResultArray = restaurants.filter { (restaurant) -> Bool in
+      return (restaurant.name?.lowercased().contains(text.lowercased()))!
+    }
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    searchController = UISearchController(searchResultsController: nil)
+    searchController.searchResultsUpdater = self
+    searchController.dimsBackgroundDuringPresentation = false
+    tableView.tableHeaderView = searchController.searchBar
+    searchController.searchBar.delegate = self
+    searchController.searchBar.barTintColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+    searchController.searchBar.tintColor = .white
+    definesPresentationContext = true
+    
     tableView.estimatedRowHeight = 85
-    tableView.rowHeight = UITableView.automaticDimension
+    tableView.rowHeight = UITableViewAutomaticDimension
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
    // create fetch request with descriptor
@@ -101,21 +120,33 @@ class EateriesTableViewController: UITableViewController, NSFetchedResultsContro
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of rows
+    if searchController.isActive && searchController.searchBar.text != "" {
+      return filteredResultArray.count
+    }
     return restaurants.count
   }
   
+  func restaurantToDisplayAt(indexPath: IndexPath) -> Restaurant {
+    let restaurant: Restaurant
+    if searchController.isActive && searchController.searchBar.text != "" {
+      restaurant = filteredResultArray[indexPath.row]
+    } else {
+      restaurant = restaurants[indexPath.row]
+    }
+    return restaurant
+  }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! EateriesTableViewCell
-    
-    cell.thumbnailImageView.image = UIImage(data: restaurants[indexPath.row].image! as Data)
+    let restaurant = restaurantToDisplayAt(indexPath: indexPath)
+    cell.thumbnailImageView.image = UIImage(data: restaurant.image! as Data)
     cell.thumbnailImageView.layer.cornerRadius = 32.5
     cell.thumbnailImageView.clipsToBounds = true
-    cell.nameLabel.text = restaurants[indexPath.row].name
-    cell.locationLabel.text = restaurants[indexPath.row].location
-    cell.typeLabel.text = restaurants[indexPath.row].type
+    cell.nameLabel.text = restaurant.name
+    cell.locationLabel.text = restaurant.location
+    cell.typeLabel.text = restaurant.type
     
-    cell.accessoryType = self.restaurants[indexPath.row].isVisited ? .checkmark : .none
+    cell.accessoryType = restaurant.isVisited ? .checkmark : .none
     
     return cell
   }
@@ -181,7 +212,9 @@ class EateriesTableViewController: UITableViewController, NSFetchedResultsContro
     
     let delete = UITableViewRowAction(style: .default, title: "Удалить") { (action, indexPath) in
       self.restaurants.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
       if let context = (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.persistentContainer.viewContext {
+        
         let objectToDelete = self.fetchResultsController.object(at: indexPath)
         context.delete(objectToDelete)
         
@@ -202,20 +235,28 @@ class EateriesTableViewController: UITableViewController, NSFetchedResultsContro
     if segue.identifier == "detailSegue" {
       if let indexPath = tableView.indexPathForSelectedRow {
         let dvc = segue.destination as! EateryDetailViewController
-        dvc.restaurant = self.restaurants[indexPath.row]
+        dvc.restaurant = restaurantToDisplayAt(indexPath: indexPath)
       }
     }
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 }
+
+
+extension EateriesTableViewController: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    filterContentFor(searchText: searchController.searchBar.text!)
+    tableView.reloadData()
+  }
+}
+
+extension EateriesTableViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if searchBar.text == "" {
+            navigationController?.hidesBarsOnSwipe = false
+        }
+    }
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        navigationController?.hidesBarsOnSwipe = true
+    }
+}
+

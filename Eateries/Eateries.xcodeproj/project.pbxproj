@@ -141,7 +141,7 @@
 					353FD2711D9D6E21001D9C00 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = NW5Z323A95;
-						LastSwiftMigration = 1250;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -335,10 +335,10 @@
 				DEVELOPMENT_TEAM = NW5Z323A95;
 				INFOPLIST_FILE = Eateries/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ru.it-center.com";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.zaebali.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -349,10 +349,10 @@
 				DEVELOPMENT_TEAM = NW5Z323A95;
 				INFOPLIST_FILE = Eateries/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ru.it-center.com";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.zaebali.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
