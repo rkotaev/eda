@@ -21,6 +21,8 @@
 		3596F90B1D9F8515009F1BE7 /* EateryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3596F90A1D9F8515009F1BE7 /* EateryDetailViewController.swift */; };
 		35FD5B6F1DA144B4007BC4FF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FD5B6E1DA144B4007BC4FF /* MapViewController.swift */; };
 		35FD5B721DA14503007BC4FF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35FD5B711DA14503007BC4FF /* MapKit.framework */; };
+		CA68F358264D4BAE00CD9E27 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA68F357264D4BAE00CD9E27 /* ContentViewController.swift */; };
+		CA68F35A264D4BDA00CD9E27 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA68F359264D4BDA00CD9E27 /* PageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		3596F90A1D9F8515009F1BE7 /* EateryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EateryDetailViewController.swift; sourceTree = "<group>"; };
 		35FD5B6E1DA144B4007BC4FF /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		35FD5B711DA14503007BC4FF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CA68F357264D4BAE00CD9E27 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		CA68F359264D4BDA00CD9E27 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,7 @@
 				355460391DA1146C00DD19A5 /* RateViewController.swift */,
 				35FD5B6E1DA144B4007BC4FF /* MapViewController.swift */,
 				3507838C1DA3584C0091BC42 /* NewEateryTableViewController.swift */,
+				CA68F35B264D4BE800CD9E27 /* Page */,
 				351448EB1DA5386200AD725B /* Eateries.xcdatamodeld */,
 				354F6B3A1D9FA38000FE3086 /* Detail */,
 				353FD27C1D9D6E21001D9C00 /* Assets.xcassets */,
@@ -106,6 +111,15 @@
 				35FD5B711DA14503007BC4FF /* MapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CA68F35B264D4BE800CD9E27 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				CA68F357264D4BAE00CD9E27 /* ContentViewController.swift */,
+				CA68F359264D4BDA00CD9E27 /* PageViewController.swift */,
+			);
+			name = Page;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,11 +205,13 @@
 				354F6B391D9FA37500FE3086 /* EateryDetailTableViewCell.swift in Sources */,
 				351448ED1DA5386200AD725B /* Eateries.xcdatamodeld in Sources */,
 				353FD2761D9D6E21001D9C00 /* AppDelegate.swift in Sources */,
+				CA68F35A264D4BDA00CD9E27 /* PageViewController.swift in Sources */,
 				353FD2881D9D6EBF001D9C00 /* EateriesTableViewController.swift in Sources */,
 				3596F90B1D9F8515009F1BE7 /* EateryDetailViewController.swift in Sources */,
 				351448EA1DA5370800AD725B /* CoreDataStack.swift in Sources */,
 				353FD28A1D9D7633001D9C00 /* EateriesTableViewCell.swift in Sources */,
 				3507838D1DA3584C0091BC42 /* NewEateryTableViewController.swift in Sources */,
+				CA68F358264D4BAE00CD9E27 /* ContentViewController.swift in Sources */,
 				3554603A1DA1146C00DD19A5 /* RateViewController.swift in Sources */,
 				35FD5B6F1DA144B4007BC4FF /* MapViewController.swift in Sources */,
 			);
