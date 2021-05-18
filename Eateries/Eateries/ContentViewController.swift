@@ -9,7 +9,7 @@
 import UIKit
 
 class ContentViewController: UIViewController {
-
+    
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var subheaderLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -21,8 +21,10 @@ class ContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        headerLabel.text = header
+        subheaderLabel.text = subheader
+        imageView.image = UIImage(named: imageFile)
     }
     
     override func didReceiveMemoryWarning() {

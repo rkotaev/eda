@@ -86,6 +86,13 @@ class EateriesTableViewController: UITableViewController, NSFetchedResultsContro
     }
   }
   
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let pageViewController = storyboard?.instantiateViewController(withIdentifier: "pageViewController") as? PageViewController {
+            present(pageViewController, animated: true, completion: nil)
+        }
+    }
+    
   // MARK: - Fetch results controller delegate
   
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

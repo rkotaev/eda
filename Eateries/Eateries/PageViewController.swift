@@ -9,7 +9,7 @@
 import UIKit
 
 class PageViewController: UIPageViewController {
-
+    
     var headersArray = ["Записывайте", "Находите"]
     var subheadersArray = ["Создайте свой список любимых ресторанов", "Найдите и отметьте на карте ваши любимые рестораны"]
     var imagesArray = ["food", "iphoneMap"]
@@ -17,7 +17,10 @@ class PageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = self
-        // Do any additional setup after loading the view.
+        
+        if let firstVC = displayViewController(atIndex: 0) {
+            setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+        }
     }
     
     func displayViewController(atIndex index: Int) -> ContentViewController? {
@@ -41,7 +44,7 @@ extension PageViewController: UIPageViewControllerDataSource {
         return displayViewController(atIndex: index)
     }
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController:
-        UIViewController) -> UIViewController? {
+                                UIViewController) -> UIViewController? {
         var index = (viewController as! ContentViewController).index
         index += 1
         return displayViewController(atIndex: index)
